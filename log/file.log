@@ -1,0 +1,6 @@
+2021-05-02 23:01:59.405 http-nio-8080-exec-1 INFO  file - >>>> Run Program - file Logger
+2021-05-02 23:02:25.729 http-nio-8080-exec-5 INFO  file - >>>> Run Program - file Logger
+2021-05-02 23:02:33.845 http-nio-8080-exec-8 INFO  file - >>>> Save Information - file Logger
+2021-05-02 23:02:33.908 http-nio-8080-exec-9 INFO  file - >>>> Play Game - file Logger
+2021-05-02 23:02:36.797 http-nio-8080-exec-8 INFO  file - >>>> Run Program - file Logger
+2021-05-02 23:02:36.801 http-nio-8080-exec-7 INFO  file - >>>> End Game - file Logger

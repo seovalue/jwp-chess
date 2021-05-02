@@ -7,6 +7,8 @@ import chess.dto.InitialGameInfoDto;
 import chess.dto.MoveRequestDto;
 import chess.dto.UserInfoDto;
 import chess.service.ChessService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +19,8 @@ import javax.servlet.http.HttpSession;
 @RestController
 @RequestMapping("/api/rooms")
 public class ChessRestController {
+    private static final Logger logger = LoggerFactory.getLogger(ChessController.class);
+    private static final Logger fileLogger = LoggerFactory.getLogger("file");
 
     private final ChessService chessService;
 
@@ -32,6 +36,9 @@ public class ChessRestController {
 
         HttpSession session = request.getSession();
         session.setAttribute("password", initialGameInfoDto.getPassword());
+
+        logger.info(">>>>> Save Information - console Logger");
+        fileLogger.info(">>>> Save Information - file Logger");
         return ResponseEntity.ok(roomId);
     }
 
@@ -46,6 +53,10 @@ public class ChessRestController {
 
         HttpSession session = request.getSession();
         session.setAttribute("password", password);
+
+        logger.info(">>>>> Save Second User - console Logger");
+        fileLogger.info(">>>> Save Second User - file Logger");
+
         return ResponseEntity.ok(roomId);
     }
 
@@ -57,6 +68,10 @@ public class ChessRestController {
         final Object password = session.getAttribute("password");
         String command = makeMoveCmd(moveRequestDto.getSource(), moveRequestDto.getTarget());
         chessService.move(id, command, new UserInfoDto(id, password));
+
+        logger.info(">>>>> Move Piece - console Logger");
+        fileLogger.info(">>>> Movie Piece - file Logger");
+
         return ResponseEntity.ok(new GameResponse(chessService.gameInfo(id), id));
     }
 
@@ -67,6 +82,10 @@ public class ChessRestController {
     @PostMapping("/{id}/status")
     public ResponseEntity<Void> end(@PathVariable String id) {
         chessService.updateToEnd(id);
+
+        logger.info(">>>>> End Game - console Logger");
+        fileLogger.info(">>>> End Game - file Logger");
+
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
